@@ -27,19 +27,19 @@
         {% endblock %}
     </main>
     <script>
-    // Accordion-style tab toggling for recipe cards
+    // Alternador tipo acordeón para las tarjetas de receta
     document.addEventListener('click', function(e){
         if(e.target && e.target.classList.contains('tab-btn')){
             var target = e.target.getAttribute('data-target');
             var parent = e.target.closest('.card-body');
             if(!parent) return;
 
-            // remove active state from all buttons in this card
+            // quitar estado "active" de todos los botones de esta tarjeta
             parent.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active') });
 
             var tgt = parent.querySelector('#'+target);
 
-            // close other tab-contents in this card
+            // cerrar otros contenidos de pestañas en esta tarjeta
             parent.querySelectorAll('.tab-content').forEach(function(el){
                 if(el !== tgt){
                     el.classList.remove('open');
@@ -51,16 +51,16 @@
             var isOpen = tgt.classList.contains('open');
 
             if(isOpen){
-                // close it
+                // cerrarlo
                 tgt.classList.remove('open');
                 tgt.style.maxHeight = null;
                 e.target.classList.remove('active');
             } else {
-                // open it and animate to its inner height
+                // abrirlo y animar hasta su altura interna
                 tgt.classList.add('open');
                 var inner = tgt.querySelector('.tab-inner');
                 var height = inner ? inner.scrollHeight : tgt.scrollHeight;
-                tgt.style.maxHeight = (height + 8) + 'px'; // small extra for padding
+                tgt.style.maxHeight = (height + 8) + 'px'; // pequeño extra para el padding
                 e.target.classList.add('active');
             }
         }

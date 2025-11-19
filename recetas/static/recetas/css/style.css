@@ -37,7 +37,7 @@ body{
 
 .center{ text-align:center }
 
-/* Cards */
+/* Tarjetas */
 .card{
     background:var(--card);
     border-radius:10px;
@@ -52,12 +52,12 @@ body{
 
 .card-body{padding:8px 0}
 
-/* Recipe image */
+/* Imagen de la receta */
 .receta-img{
     display:block;
     margin:0 auto 12px auto;
     width:100%;
-    max-width:360px; /* limit width */
+    max-width:360px; /* ancho máximo */
     height:auto;
     border-radius:8px;
     object-fit:cover;
@@ -66,31 +66,31 @@ body{
 .card h3{margin:6px 0 8px 0;font-size:1.1rem}
 .meta{color:var(--muted);font-size:0.9rem;margin-bottom:8px}
 
-/* Tabs inside card */
+/* Pestañas dentro de la tarjeta */
 .tabs{display:flex;gap:8px;margin:8px 0}
 .tab-btn{padding:6px 10px;border-radius:8px;background:transparent;border:1px solid rgba(15,23,42,0.06);cursor:pointer}
 .tab-btn.active{background:rgba(15,23,42,0.06)}
 .tab-content{margin-top:8px}
-/* Accordion behavior: collapsed by default, animate max-height */
+/* Comportamiento de acordeón: colapsado por defecto, animar la altura máxima (max-height) */
 .tab-content {
     overflow: hidden;
-    max-height: 0; /* collapsed by default */
+    max-height: 0; /* colapsado por defecto */
     transition: max-height 0.35s ease, padding 0.35s ease;
-    padding: 0 0; /* no vertical padding when collapsed */
+    padding: 0 0; /* sin padding vertical cuando está colapsado */
 }
 .tab-content.open {
-    padding: 0.5rem 0; /* restore vertical padding when open */
+    padding: 0.5rem 0; /* restaurar padding vertical cuando está abierto */
 }
 .tab-inner {
-    padding: 0.25rem 0; /* inner padding used to calculate height */
+    padding: 0.25rem 0; /* padding interno usado para calcular la altura */
 }
 .tab-content.open{
-    padding: 0.5rem 0; /* restore vertical padding when open */
-    /* when open, JS will set the exact max-height inline; this is a fallback */
+    padding: 0.5rem 0; /* restaurar padding vertical cuando está abierto */
+    /* cuando está abierto, el JS establecerá el max-height exacto en línea; esto es un respaldo */
     max-height: 800px;
 }
 
-/* Buttons */
+/* Botones */
 .btn{
     display:inline-block;padding:8px 14px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;font-weight:600;
 }
@@ -98,7 +98,7 @@ body{
 .btn-ghost{background:transparent;border:1px solid rgba(15,23,42,0.06);color:#111}
 .btn-danger{background:var(--danger);color:#fff}
 
-/* Forms */
+/* Formularios */
 .form-container{max-width:560px;margin:0 auto}
 .form-group{margin-bottom:12px}
 .form-group label{display:block;margin-bottom:6px;font-weight:600;color:#111827}
@@ -106,22 +106,22 @@ body{
 textarea{min-height:120px}
 .form-actions{text-align:center;margin-top:12px}
 
-/* Helper text */
+/* Texto de ayuda */
 .helper{font-size:0.9rem;color:var(--muted);margin-top:8px}
 
-/* Small utilities */
+/* Utilidades pequeñas */
 .muted{color:var(--muted)}
 .mb-12{margin-bottom:12px}
 .float-right{float:right}
 
-/* Responsive tweaks */
+/* Ajustes responsivos */
 @media(max-width:480px){
     .container{padding:0 12px}
     .navbar .container{flex-direction:column;align-items:flex-start}
 }
 
-/* Backwards-compatibility aliases for older class names
-   This keeps older templates working while using the new system.
+/* Alias de compatibilidad hacia atrás para nombres de clases antiguos
+    Esto mantiene las plantillas antiguas funcionando con el nuevo sistema.
 */
 .btn-crear { /* alias -> btn-primary */
     background: var(--accent);
@@ -135,7 +135,7 @@ textarea{min-height:120px}
     color:#fff;
     padding:8px 14px;border-radius:8px;display:inline-block;
 }
-.receta { /* legacy card alias */
+.receta { /* alias legado de tarjeta */
     background:var(--card);
     border-radius:10px;
     padding:16px;
@@ -146,15 +146,15 @@ textarea{min-height:120px}
     display:block;margin:0 auto 12px auto;width:100%;max-width:360px;height:auto;border-radius:8px;object-fit:cover;
 }
 
-/* Legacy form/button classes mapped to new styles */
-.btn-submit{ /* alias to primary */
+/* Clases antiguas de formulario/botón mapeadas a los nuevos estilos */
+.btn-submit{ /* alias -> btn-primary */
     background:var(--accent);color:#fff;padding:8px 14px;border-radius:8px;border:none;cursor:pointer;
 }
-.btn-volver{ /* alias to ghost */
+.btn-volver{ /* alias -> btn-ghost */
     background:transparent;border:1px solid rgba(15,23,42,0.06);color:#111;padding:8px 14px;border-radius:8px;display:inline-block;text-decoration:none;
 }
 
-/* Small input style compatibility */
+/* Compatibilidad de estilo para inputs pequeños */
 .form-group{margin-bottom:12px}
 label{display:block;margin-bottom:6px;font-weight:600;color:#111827}
 input[type="text"], input[type="number"], textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;background:#fff}
