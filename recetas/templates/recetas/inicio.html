@@ -1,0 +1,18 @@
+{% extends 'recetas/base.html' %}
+
+{% block content %}
+    <div class="center mb-12">
+        <h2>Bienvenido a Mi Recetario</h2>
+        <p class="helper">Accedé a tu cuenta o explorá las recetas públicas.</p>
+        <div class="form-actions" style="margin-top:14px">
+            {% if user.is_authenticated %}
+                <a href="{% url 'lista_recetas' %}" class="btn btn-primary">Ver mis recetas</a>
+                <a href="{% url 'logout' %}" class="btn btn-ghost">Cerrar sesión</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary">Iniciar sesión</a>
+                <a href="{% url 'register' %}" class="btn btn-ghost">Registrarse</a>
+                <a href="{% url 'lista_recetas' %}" class="btn btn-ghost">Ver recetas</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

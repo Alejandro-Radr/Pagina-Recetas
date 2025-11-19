@@ -1,0 +1,21 @@
+{% extends 'recetas/base.html' %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>Iniciar sesión</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Usuario</label>
+                <input type="text" name="username" id="id_username" required>
+            </div>
+            <div class="form-group">
+                <label for="id_password">Contraseña</label>
+                <input type="password" name="password" id="id_password" required>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-submit">Entrar</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

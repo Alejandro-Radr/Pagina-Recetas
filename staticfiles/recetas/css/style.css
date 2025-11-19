@@ -1,0 +1,89 @@
+body { 
+    font-family: Arial, sans-serif; 
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.content {
+    margin: 20px;
+    padding: 20px;
+}
+
+.btn { 
+    padding: 8px 16px; 
+    text-decoration: none; 
+    margin: 5px; 
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.btn-crear { 
+    background-color: #4CAF50; 
+    color: white; 
+}
+
+.btn-borrar { 
+    background-color: #f44336; 
+    color: white; 
+}
+
+.receta { 
+    border: 1px solid #ddd; 
+    margin: 10px 0; 
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Estilos adicionales para el formulario */
+form { 
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+.form-group { 
+    margin-bottom: 15px; 
+}
+
+label { 
+    display: block; 
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"], 
+input[type="number"],
+textarea { 
+    width: 100%; 
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.btn-submit { 
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-volver { 
+    background-color: #666; 
+    color: white; 
+    text-decoration: none; 
+    display: inline-block; 
+}

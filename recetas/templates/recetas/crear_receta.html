@@ -1,0 +1,35 @@
+{% extends 'recetas/base.html' %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>{% if receta %}Editar Receta{% else %}Crear Nueva Receta{% endif %}</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_nombre">Nombre:</label>
+                {{ form.nombre }}
+            </div>
+            <div class="form-group">
+                <label for="id_ingredientes">Ingredientes:</label>
+                {{ form.ingredientes }}
+            </div>
+            <div class="form-group">
+                <label for="id_calorias">Calorías:</label>
+                {{ form.calorias }}
+            </div>
+            <div class="form-group">
+                <label for="id_imagen">Imagen:</label>
+                {{ form.imagen }}
+            </div>
+            <div class="form-group">
+                <label for="id_pasos">Pasos</label>
+                {{ form.pasos }}
+                <p class="helper">Describe los pasos a seguir, uno por línea o con viñetas.</p>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">{% if receta %}Actualizar{% else %}Guardar{% endif %} receta</button>
+                <a href="{% url 'lista_recetas' %}" class="btn btn-volver">Volver a la lista</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

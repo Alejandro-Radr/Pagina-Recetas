@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mi Recetario</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'recetas/css/style.css' %}">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <a class="brand" href="{% url 'inicio' %}">Mi Recetario Personal</a>
+            <div class="nav-actions">
+                {% if user.is_authenticated %}
+                    <span class="muted">Hola, {{ user.username }}</span>
+                    <a href="{% url 'lista_recetas' %}" class="btn btn-ghost">Mis recetas</a>
+                    <a href="{% url 'logout' %}" class="btn btn-ghost">Cerrar sesión</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-ghost">Iniciar sesión</a>
+                    <a href="{% url 'register' %}" class="btn btn-primary">Registrarse</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+    <script>
+    // Accordion-style tab toggling for recipe cards
+    document.addEventListener('click', function(e){
+        if(e.target && e.target.classList.contains('tab-btn')){
+            var target = e.target.getAttribute('data-target');
+            var parent = e.target.closest('.card-body');
+            if(!parent) return;
+
+            // remove active state from all buttons in this card
+            parent.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active') });
+
+            var tgt = parent.querySelector('#'+target);
+
+            // close other tab-contents in this card
+            parent.querySelectorAll('.tab-content').forEach(function(el){
+                if(el !== tgt){
+                    el.classList.remove('open');
+                    el.style.maxHeight = null;
+                }
+            });
+
+            if(!tgt) return;
+            var isOpen = tgt.classList.contains('open');
+
+            if(isOpen){
+                // close it
+                tgt.classList.remove('open');
+                tgt.style.maxHeight = null;
+                e.target.classList.remove('active');
+            } else {
+                // open it and animate to its inner height
+                tgt.classList.add('open');
+                var inner = tgt.querySelector('.tab-inner');
+                var height = inner ? inner.scrollHeight : tgt.scrollHeight;
+                tgt.style.maxHeight = (height + 8) + 'px'; // small extra for padding
+                e.target.classList.add('active');
+            }
+        }
+    });
+    </script>
+</body>
+</html>

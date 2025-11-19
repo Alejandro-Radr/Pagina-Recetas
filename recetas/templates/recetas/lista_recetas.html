@@ -1,0 +1,43 @@
+{% extends 'recetas/base.html' %}
+
+{% block content %}
+    <div class="center mb-12">
+        <h2>Mis Recetas</h2>
+        <a href="{% url 'crear_receta' %}" class="btn btn-primary">Crear nueva</a>
+    </div>
+
+    <div class="card-grid">
+        {% for receta in recetas %}
+        <article class="card">
+            {% if receta.imagen %}
+                <img src="{{ receta.imagen.url }}" alt="{{ receta.nombre }}" class="receta-img">
+            {% endif %}
+            <div class="card-body">
+                <h3>{{ receta.nombre }}</h3>
+                <div class="meta">Calorías: {{ receta.calorias }}</div>
+
+                <div class="tabs" data-recipe-id="{{ receta.id }}">
+                    <button type="button" class="tab-btn btn-ghost" data-target="ingredientes-{{ receta.id }}">Ver ingredientes</button>
+                    <button type="button" class="tab-btn btn-ghost" data-target="pasos-{{ receta.id }}">Ver pasos</button>
+                </div>
+
+                <div id="ingredientes-{{ receta.id }}" class="tab-content">
+                    <div class="tab-inner">{{ receta.ingredientes|linebreaksbr }}</div>
+                </div>
+                <div id="pasos-{{ receta.id }}" class="tab-content">
+                    <div class="tab-inner">{{ receta.pasos|linebreaksbr }}</div>
+                </div>
+
+                <div class="form-actions">
+                    <a href="{% url 'editar_receta' receta.id %}" class="btn btn-ghost">Editar</a>
+                    <a href="{% url 'borrar_receta' receta.id %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que quieres borrar esta receta?')">Borrar</a>
+                </div>
+            </div>
+        </article>
+        {% empty %}
+        <div class="card center">
+            <p class="muted">No hay recetas aún. Creá la primera.</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
