@@ -13,4 +13,5 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     # Provide a route for /accounts/profile/ to avoid missing-page errors
     path('accounts/profile/', views.inicio, name='profile'),
+    path('mi-perfil/', views.mi_perfil, name='mi_perfil'),
 ]

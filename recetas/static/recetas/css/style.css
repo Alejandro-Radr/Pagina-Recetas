@@ -47,6 +47,12 @@ body{
     overflow:hidden;
 }
 
+/* Resaltar recetas propias */
+.own-receta{
+    box-shadow:0 8px 24px rgba(76,175,80,0.08);
+    border:1px solid rgba(76,175,80,0.12);
+}
+
 .card-grid{ display:grid; grid-template-columns: 1fr; gap:18px }
 @media(min-width:880px){.card-grid{grid-template-columns: repeat(2,1fr)}}
 

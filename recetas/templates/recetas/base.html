@@ -12,6 +12,7 @@
             <div class="nav-actions">
                 {% if user.is_authenticated %}
                     <span class="muted">Hola, {{ user.username }}</span>
+                    <a href="{% url 'mi_perfil' %}" class="btn btn-ghost">Mi perfil</a>
                     <a href="{% url 'lista_recetas' %}" class="btn btn-ghost">Mis recetas</a>
                     <a href="{% url 'logout' %}" class="btn btn-ghost">Cerrar sesión</a>
                 {% else %}

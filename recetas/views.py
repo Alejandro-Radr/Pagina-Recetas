@@ -4,14 +4,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout as auth_logout
+from django.http import HttpResponseForbidden
 
 from .models import Receta
 from .forms import RecetaForm
 
 
 def lista_recetas(request):
-    recetas = Receta.objects.all()
-    return render(request, 'recetas/lista_recetas.html', {'recetas': recetas})
+    # Mostrar todas las recetas; las del usuario actual se destacan en la plantilla
+    recetas = Receta.objects.all().select_related('user')
+    return render(request, 'recetas/lista_recetas.html', {'recetas': recetas, 'user': request.user})
 
 
 @login_required
@@ -19,7 +21,11 @@ def crear_receta(request):
     if request.method == 'POST':
         form = RecetaForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            # Crear la receta sin guardar aún
+            receta = form.save(commit=False)
+            # Asignar el usuario actual como propietario
+            receta.user = request.user
+            receta.save()
             return redirect('lista_recetas')
     else:
         form = RecetaForm()
@@ -29,6 +35,9 @@ def crear_receta(request):
 @login_required
 def borrar_receta(request, id):
     receta = get_object_or_404(Receta, id=id)
+    # Solo el autor puede borrar su receta
+    if receta.user != request.user:
+        return HttpResponseForbidden('No tienes permiso para borrar esta receta')
     receta.delete()
     return redirect('lista_recetas')
 
@@ -60,11 +69,30 @@ def logout_view(request):
 def editar_receta(request, id):
     """Editar una receta existente."""
     receta = get_object_or_404(Receta, id=id)
+    # Verificar que el usuario actual es el autor
+    if receta.user != request.user:
+        return HttpResponseForbidden('No tienes permiso para editar esta receta')
+
     if request.method == 'POST':
         form = RecetaForm(request.POST, request.FILES, instance=receta)
         if form.is_valid():
-            form.save()
+            # Guardar sin commit primero
+            receta = form.save(commit=False)
+            # Asegurar que el propietario no cambie
+            receta.user = receta.user
+            receta.save()
             return redirect('lista_recetas')
     else:
         form = RecetaForm(instance=receta)
     return render(request, 'recetas/crear_receta.html', {'form': form, 'receta': receta})
+
+
+@login_required
+def mi_perfil(request):
+    """Vista de perfil del usuario: nombre, cantidad y listado de sus recetas propias."""
+    user = request.user
+    # Obtener solo las recetas del usuario actual
+    recetas = Receta.objects.filter(user=user)
+    # Contar el total de recetas del usuario
+    total = recetas.count()
+    return render(request, 'recetas/mi_perfil.html', {'perfil_user': user, 'recetas': recetas, 'total': total})
